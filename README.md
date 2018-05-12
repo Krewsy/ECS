@@ -1,5 +1,5 @@
 # ECS
-This is a fast and easy ECS framework for use in both game and business application.
+This is a fast and easy ECS framework for use in both game and business applications.
 
 ## Use
 
