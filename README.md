@@ -2,7 +2,6 @@
 This is a fast and easy ECS framework for use in both game and business application.
 
 ## Use
-### There are some Test examples, They show the simplest method of getting started
 
 ### Entities and Components
 
