@@ -57,25 +57,25 @@ namespace ECS
             
             if (!componentManagers.Any())
             {
-                components = new ComponentManager(new T());
-                components.addComponent(entityId, new T());
+                components = new ComponentManager(typeof(T));
+                components.AddComponent(entityId, new T());
                 componentManagers.Add(components);
             }
             else
             {
-                foreach (ComponentManager cm in componentManagers.ToList<ComponentManager>())
+                var applicableManager = componentManagers.Where(i => i._type == typeof(T)).Select(j => j).FirstOrDefault();
+
+                if (applicableManager != null)
                 {
-                    if (cm.components["type"].GetType() == typeof(T))
-                    {
-                        cm.addComponent(entityId, new T());
-                    }
-                    else
-                    {
-                        components = new ComponentManager(new T());
-                        components.addComponent(entityId, new T());
-                        componentManagers.Add(components);
-                    }
+                    applicableManager.AddComponent(entityId, new T());
                 }
+                else
+                {
+                    components = new ComponentManager(typeof(T));
+                    components.AddComponent(entityId, new T());
+                    componentManagers.Add(components);
+                }
+
             }
         }
 
@@ -87,16 +87,12 @@ namespace ECS
         /// <returns></returns>
         public T GetComponent<T>(string entityId)
         {
-            Component component;
 
-            foreach (ComponentManager cm in componentManagers)
+            var manager = componentManagers.Where(i => i._type == typeof(T)).Select(j => j).FirstOrDefault();
+
+            if (manager != null)
             {
-                if (cm.components["type"].GetType() == typeof(T))
-                {
-
-                    cm.components.TryGetValue(entityId, out component);
-                    return (T)(object)component;
-                }
+                return (T)(object)manager.GetComponent(entityId);
             }
 
             return default;
