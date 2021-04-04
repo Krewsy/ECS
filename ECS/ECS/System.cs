@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ECS
 {
+    /// <summary>
+    /// Facilitates the function of all systems and provides utility for managing compatible entities.
+    /// </summary>
     public abstract class System
     {
 

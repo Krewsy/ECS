@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace ECS
 {
-    // this class defines our Entity object, which will be used to create all of the program entities.
+    /// <summary>
+    /// This class defines our Entity object, which will be used to create all of the program entities. 
+    /// </summary>
     public sealed class Entity
     {
+        /// <summary>
+        /// An arbitrary string value to identify the entity.
+        /// </summary>
         public string id { get; set; }
     }
 }

@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace ECS
 {
-    // IComponent will be the base class from which all of our Components will inherit. a Component is a bag of variables that will be used to define our Entities within our Systems.
-    public class Component
+    /// <summary>
+    /// Component will be the base class from which all of our Components will inherit. a Component is a bag of variables that will be used to define our Entities within our Systems.
+    /// </summary>
+    public abstract class Component
     {
     }
 }

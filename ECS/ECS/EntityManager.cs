@@ -6,12 +6,20 @@ using System.Threading.Tasks;
 
 namespace ECS
 {
+    /// <summary>
+    /// The primary class for the ECS system. Handles creation and manipulation of all entities, including adding and accessing components belonging to active entities.
+    /// </summary>
     public class EntityManager
     {
+        /// <summary>
+        /// A list of currently existing entities.
+        /// </summary>
         public List<Entity> activeEntities;
-        public List<ComponentManager> componentManagers;
 
-        Exception ComponentNotFoundException;
+        /// <summary>
+        /// A list containing a manager for each type of in-use component.
+        /// </summary>
+        public List<ComponentManager> componentManagers;
 
         public EntityManager()
         {
@@ -19,7 +27,12 @@ namespace ECS
             componentManagers = new List<ComponentManager>();
         }
 
-        public Entity createEntity(string id)
+        /// <summary>
+        /// Creates a new entity given an ID.
+        /// </summary>
+        /// <param name="id">The created entity will be identified by this.</param>
+        /// <returns></returns>
+        public Entity CreateEntity(string id)
         {
             Entity newEntity = new Entity();
 
@@ -28,7 +41,12 @@ namespace ECS
             return newEntity;
         }
 
-        public void addComponent<T>(string entityId) where T : Component, new()
+        /// <summary>
+        /// Add component to an entity identified by the supplied id.
+        /// </summary>
+        /// <typeparam name="T">A component</typeparam>
+        /// <param name="entityId">The identifier of the entity you wish to add the component to.</param>
+        public void AddComponent<T>(string entityId) where T : Component, new()
         {
 
             ComponentManager components;
@@ -36,9 +54,9 @@ namespace ECS
 
             tempManagers = componentManagers;
 
+            
             if (!componentManagers.Any())
             {
-                Console.WriteLine("I'm creating the first component list!");
                 components = new ComponentManager(new T());
                 components.addComponent(entityId, new T());
                 componentManagers.Add(components);
@@ -49,12 +67,10 @@ namespace ECS
                 {
                     if (cm.components["type"].GetType() == typeof(T))
                     {
-                        Console.WriteLine("Adding Component to existing list...");
                         cm.addComponent(entityId, new T());
                     }
                     else
                     {
-                        Console.WriteLine("Creating new component list and adding the new Component...");
                         components = new ComponentManager(new T());
                         components.addComponent(entityId, new T());
                         componentManagers.Add(components);
@@ -63,7 +79,13 @@ namespace ECS
             }
         }
 
-        public T getComponent<T>(string entityId)
+        /// <summary>
+        /// Retrieve a component of the given type for the entity identified by the supplied id.
+        /// </summary>
+        /// <typeparam name="T">A component</typeparam>
+        /// <param name="entityId">The identifier of the entity you wish to retrieve the component for.</param>
+        /// <returns></returns>
+        public T GetComponent<T>(string entityId)
         {
             Component component;
 
@@ -77,7 +99,7 @@ namespace ECS
                 }
             }
 
-            return default(T);
+            return default;
         }
 
     }
