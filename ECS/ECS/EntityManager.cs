@@ -37,8 +37,20 @@ namespace ECS
             Entity newEntity = new Entity();
 
             newEntity.id = id;
+            activeEntities.Add(newEntity);
 
             return newEntity;
+        }
+
+        public void RemoveEntity(Entity e)
+        {
+            activeEntities.Remove(e);
+        }
+
+        public void RemoveEntity(string id)
+        {
+            Entity toRemove = activeEntities.Where(i => i.id == id).Select(j => j).FirstOrDefault();
+            activeEntities.Remove(toRemove);
         }
 
         /// <summary>

@@ -38,6 +38,10 @@ namespace ECS
 
         }
 
+        /// <summary>
+        /// Return a list of entities that have an instance of this component
+        /// </summary>
+        /// <returns></returns>
         public List<string> GetEntities()
         {
             return components.Keys.ToList();
