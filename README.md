@@ -1,6 +1,8 @@
 # ECS
 An incomplete ECS framework written in C#. Authored in 2016. 
 
+The framework contains functionality for creating entities and components as well as managing them in groups but the functionality to facilitate systems hasn't been fleshed out. That being said, the framework is functional if you'd like to use it, it'll just require a little more elbow grease than was planned when I first wrote it. The idea is that systems will be easy to create once you can derive from the base Systems class to get all applicable entities/components required for each specific system. As it stands, you will have to collect all of those yourself using activeEntities and the component managers. I am going to work on it slowly when I have time, I just happened to find this source on an old harddrive and wanted to go ahead and throw it on github. Enjoy!
+
 ## Use
 
 ### Entities and Components
