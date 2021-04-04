@@ -13,7 +13,7 @@ namespace ECS
     {
 
         public EntityManager entityHandler;
-        public Dictionary<string, List<Component>> compatibleEntities;
+        public List<string> compatibleEntities;
 
         public List<Type> compatibleTypes;
 
@@ -27,37 +27,18 @@ namespace ECS
             compatibleEntities = getCompatibleEntities();
         }
 
-        public Dictionary<string, List<Component>> getCompatibleEntities()
+        public List<string> getCompatibleEntities()
         {
-            Dictionary<string, List<Component>> compatible = new Dictionary<string, List<Component>>();
+            List<string> compatible = new List<string>();
 
-            foreach (Type t in compatibleTypes)
+            var compatibleManagers = entityHandler.componentManagers.Where(i => compatibleTypes.Contains(i._type)).Select(j => j).ToList();
+
+            foreach (ComponentManager cm in compatibleManagers)
             {
-                foreach (ComponentManager cm in entityHandler.componentManagers)
-                {
-                    if (cm.components["type"].GetType() == t)
-                    {
-
-                        foreach (KeyValuePair<string, Component> k in cm.components)
-                        {
-                            List<Component> list;
-                            if (compatible.TryGetValue(k.Key, out list))
-                            {
-                                list.Add(k.Value);
-                                compatible[k.Key] = list;
-                            }
-                            else
-                            {
-                                list = new List<Component>();
-                                list.Add(k.Value);
-                                compatible.Add(k.Key, list);
-                            }
-                        }
-                    }
-                }
+                compatible.AddRange(cm.GetEntities());
             }
 
-            return compatible;
+            return compatible.Distinct().ToList();
 
 
         }
