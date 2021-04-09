@@ -42,11 +42,19 @@ namespace ECS
             return newEntity;
         }
 
+        /// <summary>
+        /// Remove the given entity.
+        /// </summary>
+        /// <param name="e"></param>
         public void RemoveEntity(Entity e)
         {
             activeEntities.Remove(e);
         }
 
+        /// <summary>
+        /// Remove entity with the given id.
+        /// </summary>
+        /// <param name="id"></param>
         public void RemoveEntity(string id)
         {
             Entity toRemove = activeEntities.Where(i => i.id == id).Select(j => j).FirstOrDefault();
@@ -65,7 +73,6 @@ namespace ECS
             List<ComponentManager> tempManagers;
 
             tempManagers = componentManagers;
-
             
             if (!componentManagers.Any())
             {
@@ -105,6 +112,23 @@ namespace ECS
             if (manager != null)
             {
                 return (T)(object)manager.GetComponent(entityId);
+            }
+
+            return default;
+        }
+
+        /// <summary>
+        /// Returns a manager of the given type if it exists.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public T GetManager<T>()
+        {
+            var manager = componentManagers.Where(i => i._type == typeof(T)).Select(j => j).FirstOrDefault();
+
+            if (manager != null)
+            {
+                return (T)(object)manager;
             }
 
             return default;

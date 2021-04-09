@@ -11,7 +11,10 @@ namespace Tests
             //HelloWorld hw = new HelloWorld();
 
             // Combat Test
-            CombatTest ct = new CombatTest();
+            //CombatTest ct = new CombatTest();
+
+            // System Test
+            SystemTest st = new SystemTest();
         }
     }
 }

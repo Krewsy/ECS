@@ -7,12 +7,18 @@ using System.Threading.Tasks;
 namespace ECS
 {
     /// <summary>
-    /// Contains a list of entity IDs and their respective components of the specified type.
+    /// Contains a dictionary of entity IDs and their respective components of the specified type.
     /// </summary>
     public class ComponentManager
     {
+        /// <summary>
+        /// A key value collection of components keyed by entity IDs.
+        /// </summary>
         private Dictionary<string, Component> components;
 
+        /// <summary>
+        /// The type of component this manager contains.
+        /// </summary>
         public Type _type { get; private set; }
 
         public ComponentManager(Type type)

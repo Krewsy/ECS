@@ -49,7 +49,7 @@
     <Compile Include="ECS\ComponentManager.cs" />
     <Compile Include="ECS\Entity.cs" />
     <Compile Include="ECS\EntityManager.cs" />
-    <Compile Include="ECS\System.cs" />
+    <Compile Include="ECS\EntitySystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
