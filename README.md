@@ -40,10 +40,11 @@ To create a system, create a class that inherits EntitySystem.
 public class TestSystem : EntitySystem
 ```
 
-Then declare your constructor:
+Then declare your constructor, passing compatible types into the base constructor:
 ```
 public TestSystem(EntityManager entityHandler) :
     base(entityHandler, new Type[] {
         typeof(SomeComponent) })
  ```
+ (or pass them in when you create the object itself)
 
