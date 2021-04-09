@@ -34,3 +34,16 @@ entityManager.getComponent<SomeComponent>(entity.id).stuff = "Goodbye World!";
 ```
 
 # WIP - Using Systems
+
+To create a system, create a class that inherits EntitySystem.
+```
+public class TestSystem : EntitySystem
+```
+
+Then declare your constructor:
+```
+public TestSystem(EntityManager entityHandler) :
+    base(entityHandler, new Type[] {
+        typeof(SomeComponent) })
+ ```
+
